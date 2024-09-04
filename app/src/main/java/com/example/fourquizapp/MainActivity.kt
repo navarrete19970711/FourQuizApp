@@ -1,5 +1,6 @@
 package com.example.fourquizapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -140,16 +141,24 @@ class MainActivity : AppCompatActivity() {
         val btn3:Button = findViewById(R.id.btn3)
         val btnNext:Button = findViewById(R.id.btnNext)
 
-        AlertDialog.Builder(this)
-            .setTitle("正解！！")
-            .setMessage(quizData[i][0])
-            .setPositiveButton("OK",null)
-            .show()
-        btn0.isEnabled = false
-        btn1.isEnabled = false
-        btn2.isEnabled = false
-        btn3.isEnabled = false
-        btnNext.isEnabled = true
+        // 10) 全問正解したらGameclear画面へ
+        if (i == 3){
+            val intent = Intent(this,MainActivity2::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            AlertDialog.Builder(this)
+                .setTitle("正解！！")
+                .setMessage(quizData[i][0])
+                .setPositiveButton("OK",null)
+                .show()
+            btn0.isEnabled = false
+            btn1.isEnabled = false
+            btn2.isEnabled = false
+            btn3.isEnabled = false
+            btnNext.isEnabled = true
+        }
+
     }
 
 }
